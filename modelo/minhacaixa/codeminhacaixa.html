@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="pt-br" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gestão do Fluxo de Contratação - Minha Caixa de Trabalho</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter (similar to the font used in the UI) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-colors">
+    /* Specific colors extracted from the design reference */
+    .bg-sidebar { background-color: #1a233b; }
+    .bg-main { background-color: #f3f5f8; }
+    .text-sidebar { color: #a1a8b9; }
+    .text-active { color: #ffffff; }
+    .bg-active-nav { background-color: rgba(255, 255, 255, 0.1); }
+    .border-card { border-color: #e5e7eb; }
+    .text-process-blue { color: #3b82f6; }
+    .badge-alta { background-color: #fee2e2; color: #ef4444; }
+    .badge-media { background-color: #f3f4f6; color: #6b7280; }
+    .badge-baixa { background-color: #d1fae5; color: #10b981; }
+  </style>
+</head>
+<body class="bg-main flex h-screen overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="bg-sidebar w-64 flex-shrink-0 flex flex-col h-full overflow-y-auto" data-purpose="navigation-sidebar">
+<!-- Logo Section -->
+<div class="p-6 flex items-center space-x-3">
+<div class="w-8 h-8 bg-white/20 rounded flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-white font-bold text-sm leading-tight">Gestão do Fluxo de Contratação</span>
+</div>
+<!-- User Profile Snapshot -->
+
+<!-- Navigation Groups -->
+<nav class="flex-1 px-4 py-6 space-y-8">
+<!-- Principal -->
+<div>
+<h3 class="text-sidebar text-[10px] uppercase font-bold tracking-wider px-2 mb-2">Principal</h3>
+<ul class="space-y-1">
+<li class=""><a class="flex items-center space-x-3 px-3 py-2 text-sidebar text-sm hover:bg-active-nav rounded transition" href="#"><span class="">Dashboard</span></a></li>
+<li class=""><a class="flex items-center space-x-3 px-3 py-2 bg-active-nav text-white text-sm rounded font-medium" href="#"><span class="">Minha Caixa</span></a></li>
+<li class=""><a class="flex items-center space-x-3 px-3 py-2 text-sidebar text-sm hover:bg-active-nav rounded" href="#"><span class="">Processos</span></a></li>
+</ul>
+</div>
+<!-- Operacional -->
+
+<!-- Monitoramento -->
+<div>
+
+<ul class="space-y-1 text-sidebar text-sm">
+
+
+<li class=""></li>
+</ul>
+</div>
+</nav>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto">
+<!-- BEGIN: Header -->
+
+<!-- END: Header -->
+<!-- BEGIN: Minha Caixa Page Content -->
+<div class="p-8" data-purpose="page-body">
+<!-- Page Title and Export Button -->
+<div class="flex justify-between items-start mb-6">
+<div>
+<h1 class="text-xl font-bold text-gray-800">2. Minha Caixa de Trabalho</h1>
+<p class="text-sm text-gray-500 mt-1">Processos que estão sob minha responsabilidade</p>
+</div>
+<button class="flex items-center space-x-2 px-4 py-2 border border-card rounded text-xs font-semibold text-gray-700 bg-white shadow-sm hover:bg-gray-50 transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Exportar</span>
+</button>
+</div>
+<!-- BEGIN: Stats Cards Grid -->
+<div class="grid grid-cols-4 gap-4 mb-8" data-purpose="stats-summary">
+<!-- Card 1: Para Análise -->
+<div class="bg-white p-6 rounded-xl border border-card shadow-sm">
+<div class="text-sm font-semibold text-blue-600 mb-2">Para Análise</div>
+<div class="text-4xl font-bold text-gray-900">8</div>
+</div>
+<!-- Card 2: Em Atraso -->
+<div class="bg-white p-6 rounded-xl border border-card shadow-sm">
+<div class="text-sm font-semibold text-red-600 mb-2">Em Atraso</div>
+<div class="text-4xl font-bold text-gray-900">2</div>
+</div>
+<!-- Card 3: Próximos a Vencer -->
+<div class="bg-white p-6 rounded-xl border border-card shadow-sm">
+<div class="text-sm font-semibold text-orange-500 mb-2">Próximos a Vencer</div>
+<div class="text-4xl font-bold text-gray-900">5</div>
+</div>
+<!-- Card 4: Concluído (mês) -->
+<div class="bg-white p-6 rounded-xl border border-card shadow-sm">
+<div class="text-sm font-semibold text-green-600 mb-2">Concluído (mês)</div>
+<div class="text-4xl font-bold text-gray-900">14</div>
+</div>
+</div>
+<!-- END: Stats Cards Grid -->
+<!-- BEGIN: Process Table Card -->
+<div class="bg-white rounded-xl border border-card shadow-sm overflow-hidden mb-8" data-purpose="process-list">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-gray-50 border-b border-card">
+<th class="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Processo</th>
+<th class="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Objeto</th>
+<th class="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Etapa Atual</th>
+<th class="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Prazo (SLA)</th>
+<th class="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Prioridade</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 transition">
+<td class="px-6 py-4 text-sm font-medium text-process-blue">2026.000123</td>
+<td class="px-6 py-4 text-sm text-gray-700">Aquisição de Equipamentos de TI</td>
+<td class="px-6 py-4 text-sm text-process-blue">Parecer Jurídico</td>
+<td class="px-6 py-4 text-sm text-red-500">12/06/2026 (2 dias)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-alta">ALTA</span></td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 transition">
+<td class="px-6 py-4 text-sm font-medium text-process-blue">2026.000124</td>
+<td class="px-6 py-4 text-sm text-gray-700">Contratação de Serviços de Limpeza</td>
+<td class="px-6 py-4 text-sm text-gray-700">Análise Financeira</td>
+<td class="px-6 py-4 text-sm text-red-500">11/06/2026 (1 dia)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-media">MÉDIA</span></td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 transition">
+<td class="px-6 py-4 text-sm font-medium text-process-blue">2026.000125</td>
+<td class="px-6 py-4 text-sm text-gray-700">Aquisição de Materiais de Escritório</td>
+<td class="px-6 py-4 text-sm text-gray-700">DFD</td>
+<td class="px-6 py-4 text-sm text-gray-700">15/06/2026 (5 dias)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-baixa">BAIXA</span></td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50 transition">
+<td class="px-6 py-4 text-sm font-medium text-process-blue">2026.000126</td>
+<td class="px-6 py-4 text-sm text-gray-700">Serviços de Manutenção Predial</td>
+<td class="px-6 py-4 text-sm text-gray-700">Parecer Técnico</td>
+<td class="px-6 py-4 text-sm text-gray-700">18/06/2026 (8 dias)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-alta">ALTA</span></td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-gray-50 transition">
+<td class="px-6 py-4 text-sm font-medium text-process-blue">2026.000127</td>
+<td class="px-6 py-4 text-sm text-gray-700">Contratação de Seguro Veicular</td>
+<td class="px-6 py-4 text-sm text-gray-700">Controle Interno</td>
+<td class="px-6 py-4 text-sm text-gray-700">20/06/2026 (10 dias)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-media">MÉDIA</span></td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 border-t border-card text-right">
+<a class="text-sm font-semibold text-blue-600 hover:underline" href="#">Ver todos</a>
+</div>
+</div>
+<!-- END: Process Table Card -->
+<!-- BEGIN: Rapid Actions Section -->
+<div data-purpose="quick-actions">
+<h2 class="text-lg font-bold text-gray-800 mb-6">Ações Rápidas</h2>
+<div class="grid grid-cols-5 gap-4">
+<!-- Action 1 -->
+<button class="bg-white p-6 rounded-xl border border-card shadow-sm flex flex-col items-center justify-center space-y-3 hover:bg-gray-50 transition group">
+<div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Abrir Processo</span>
+</button>
+<!-- Action 2 -->
+<button class="bg-white p-6 rounded-xl border border-card shadow-sm flex flex-col items-center justify-center space-y-3 hover:bg-gray-50 transition group">
+<div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Encaminhar</span>
+</button>
+<!-- Action 3 -->
+<button class="bg-white p-6 rounded-xl border border-card shadow-sm flex flex-col items-center justify-center space-y-3 hover:bg-gray-50 transition group">
+<div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Emitir Parecer</span>
+</button>
+<!-- Action 4 -->
+<button class="bg-white p-6 rounded-xl border border-card shadow-sm flex flex-col items-center justify-center space-y-3 hover:bg-gray-50 transition group">
+<div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Despachar</span>
+</button>
+<!-- Action 5 -->
+<button class="bg-white p-6 rounded-xl border border-card shadow-sm flex flex-col items-center justify-center space-y-3 hover:bg-gray-50 transition group">
+<div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-100">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Anexar Documento</span>
+</button>
+</div>
+</div>
+<!-- END: Rapid Actions Section -->
+</div>
+<!-- END: Minha Caixa Page Content -->
+</main>
+<!-- END: Main Content Area -->
+
+
+</body></html>

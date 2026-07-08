@@ -1,0 +1,499 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gestão do Fluxo de Contratação</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols for Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1a2b4b',
+            'primary-container': '#2c3e5d',
+            'on-primary': '#ffffff',
+            'secondary-container': '#e0e7f1',
+            'on-secondary-container': '#1a2b4b',
+            surface: '#f7fafd',
+            'surface-dim': '#d7dadd',
+            'surface-container-low': '#f1f4f7',
+            'outline-variant': '#e1e4e8',
+            'success': '#22c55e',
+            'warning': '#f59e0b',
+            'error': '#ef4444',
+            'info': '#3b82f6'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '2px',
+            DEFAULT: '4px',
+            'md': '6px',
+            'lg': '8px',
+            'xl': '12px',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scrollbar">
+    /* Custom scrollbar for side nav */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+    }
+  </style>
+<style data-purpose="layout-adjustments">
+    body {
+      background-color: #f1f4f7;
+      font-family: 'Inter', sans-serif;
+    }
+    .main-content {
+      margin-left: 240px;
+      padding-top: 64px;
+    }
+    .card-shadow {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+<!-- BEGIN: SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-primary text-on-primary flex flex-col z-50 overflow-y-auto custom-scrollbar">
+<!-- Brand Header -->
+<div class="px-6 py-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-white/20 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white">account_tree</span>
+</div>
+<div>
+<h1 class="text-sm font-bold leading-tight">Gestão do <br> Fluxo de Contratação</h1>
+</div>
+</div>
+<!-- User Profile (Sidebar version) -->
+<div class="px-4 py-4 mb-4 flex items-center gap-3 border-b border-white/10 mx-2">
+<img alt="Jo\u00e3o da Silva" class="w-10 h-10 rounded-full border-2 border-white/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxBobhJEKrBAGQ6lD0uhSk9Y6f-4ATAz-fEtcO3qegY2LjyVGMS_AhL6MoKmV8uascgVFRyhyGEf0StpN0PtRMWyFnQHt7xwsiGcn3ox3U-gcLhOGxKR1aZm5UbeaDLli-Ou9b2KPL_nqQynzeb-cFb0GDtVWmMttcfe1ww3LiifVfl9SG7QmuFd7VoerDfDs-vAmGb1bKAUa4W6hfSi8XkFwLwiEpB1ZvXiVDzs0aRhPz3-k0u54ko3c1FcXj8T-fCVg3mT3tl2g">
+<div>
+<p class="text-xs font-bold">João da Silva</p>
+<p class="text-[10px] opacity-70">Analista de Compras</p>
+</div>
+</div>
+<!-- Navigation Groups -->
+<nav class="flex-1 px-2 space-y-1">
+<div class="text-[10px] font-bold uppercase tracking-wider opacity-50 px-4 py-2">Principal</div>
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-medium transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">inbox</span>
+<span class="text-sm">Minha Caixa</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="text-sm">Processos</span>
+</a>
+<div class="text-[10px] font-bold uppercase tracking-wider opacity-50 px-4 py-2 mt-4">Operacional</div>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+<span class="text-sm">Movimentações</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">rate_review</span>
+<span class="text-sm">Pareceres</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span class="text-sm">Despachos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm">Documentos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">ink_pen</span>
+<span class="text-sm">Assinaturas</span>
+</a>
+<div class="text-[10px] font-bold uppercase tracking-wider opacity-50 px-4 py-2 mt-4">Monitoramento</div>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">route</span>
+<span class="text-sm">Workflow</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">timer</span>
+<span class="text-sm">SLA</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">assessment</span>
+<span class="text-sm">Relatórios</span>
+</a>
+<div class="text-[10px] font-bold uppercase tracking-wider opacity-50 px-4 py-2 mt-4">Cadastros</div>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm">Fornecedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm">Contratos</span>
+</a>
+<div class="text-[10px] font-bold uppercase tracking-wider opacity-50 px-4 py-2 mt-4">Administração</div>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-sm">Usuários</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">business</span>
+<span class="text-sm">Departamentos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">vpn_key</span>
+<span class="text-sm">Perfis e Permissões</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm">Configurações</span>
+</a>
+</nav>
+<!-- Bottom Org Switcher -->
+<div class="p-4 mt-auto">
+<div class="bg-white/10 rounded p-2 flex items-center justify-between text-xs cursor-pointer hover:bg-white/20">
+<div>
+<span class="block opacity-50 text-[10px]">Organização</span>
+<span class="font-bold">CRF-PE</span>
+</div>
+<span class="material-symbols-outlined text-sm">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- END: SideNavBar -->
+<!-- BEGIN: TopAppBar -->
+
+<!-- END: TopAppBar -->
+<!-- BEGIN: MainContent -->
+<main class="main-content min-h-screen p-6">
+<!-- Dashboard Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+<div>
+<h2 class="text-xl font-bold text-primary">Dashboard Executivo</h2>
+<p class="text-xs text-slate-500">Visão geral do fluxo de contratação</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-white border border-outline-variant rounded flex items-center px-3 py-1.5 gap-2">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Período</span>
+<select class="text-xs font-semibold border-none p-0 focus:ring-0 cursor-pointer bg-transparent">
+<option>01/01/2026 - 10/08/2026</option>
+</select>
+</div>
+<button class="flex items-center gap-2 bg-white border border-outline-variant rounded px-3 py-1.5 text-xs font-semibold hover:bg-slate-50">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+          Filtrar
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+<div class="bg-white p-4 rounded-lg card-shadow border-l-4 border-info">
+<p class="text-[11px] font-bold text-slate-500 uppercase mb-1">Processos Abertos</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black text-slate-800">124</span>
+<span class="text-[10px] text-info font-bold pb-1">+ 12 este mês</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg card-shadow border-l-4 border-success">
+<p class="text-[11px] font-bold text-slate-500 uppercase mb-1">Em Andamento</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black text-slate-800">89</span>
+<span class="text-[10px] text-success font-bold pb-1">+ 8 este mês</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg card-shadow border-l-4 border-error">
+<p class="text-[11px] font-bold text-slate-500 uppercase mb-1">Em Atraso (SLA)</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black text-slate-800">12</span>
+<span class="text-[10px] text-error font-bold pb-1">+ 4 este mês</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg card-shadow border-l-4 border-primary">
+<p class="text-[11px] font-bold text-slate-500 uppercase mb-1">Concluídos</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black text-slate-800">315</span>
+<span class="text-[10px] text-success font-bold pb-1">+ 27 este mês</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg card-shadow border-l-4 border-success">
+<p class="text-[11px] font-bold text-slate-500 uppercase mb-1">Valor Estimado Global</p>
+<div class="flex flex-col">
+<span class="text-xl font-black text-slate-800">R$ 18.450.000,00</span>
+<span class="text-[10px] text-success font-bold">+ R$ 2.350.000,00 este mês</span>
+</div>
+</div>
+</div>
+<!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+<div class="bg-white p-5 rounded-lg card-shadow">
+<h3 class="text-xs font-bold text-slate-600 mb-4 uppercase">Processos por Modalidade</h3>
+<div class="flex items-center">
+<div class="w-1/2 flex justify-center">
+<!-- Simulated Donut Chart -->
+<div class="relative w-32 h-32 rounded-full border-[16px] border-slate-100 flex items-center justify-center">
+<div class="absolute inset-[-16px] rounded-full border-[16px] border-transparent border-t-blue-600 border-r-blue-400 rotate-45"></div>
+<div class="text-center">
+<p class="text-xs font-bold text-slate-400">Total</p>
+<p class="text-lg font-black text-slate-800">124</p>
+</div>
+</div>
+</div>
+<div class="w-1/2 space-y-2">
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-600"></span> Pregão</span>
+<span class="font-bold text-slate-600">42 (40%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Dispensa</span>
+<span class="font-bold text-slate-600">31 (25%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-orange-400"></span> Inexigibilidade</span>
+<span class="font-bold text-slate-600">12 (11%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-400"></span> Credenciamento</span>
+<span class="font-bold text-slate-600">5 (5%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span> Adesão</span>
+<span class="font-bold text-slate-600">5 (5%)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-lg card-shadow">
+<h3 class="text-xs font-bold text-slate-600 mb-4 uppercase">SLA por Departamento</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[11px] mb-1">
+<span class="font-medium">Compras</span>
+<span class="font-bold">92%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-success h-full" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-1">
+<span class="font-medium">Jurídico</span>
+<span class="font-bold">78%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-warning h-full" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-1">
+<span class="font-medium">Financeiro</span>
+<span class="font-bold">85%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-1">
+<span class="font-medium">Controle Interno</span>
+<span class="font-bold">90%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-success h-full" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-1">
+<span class="font-medium">Gestão</span>
+<span class="font-bold">88%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-lg card-shadow">
+<h3 class="text-xs font-bold text-slate-600 mb-4 uppercase">Situação dos Processos</h3>
+<div class="flex items-center">
+<div class="w-1/2 flex justify-center">
+<!-- Simulated Donut Chart 2 -->
+<div class="relative w-32 h-32 rounded-full border-[16px] border-slate-100 flex items-center justify-center">
+<div class="absolute inset-[-16px] rounded-full border-[16px] border-transparent border-t-success border-r-success/50 -rotate-90"></div>
+<div class="text-center">
+<span class="material-symbols-outlined text-success">check_circle</span>
+</div>
+</div>
+</div>
+<div class="w-1/2 space-y-3">
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-success"></span> Dentro do prazo</span>
+<span class="font-bold text-slate-600">82 (73%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-warning"></span> Em risco</span>
+<span class="font-bold text-slate-600">17 (15%)</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-error"></span> Atrasados</span>
+<span class="font-bold text-slate-600">12 (12%)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Tables Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Last Movements -->
+<div class="bg-white rounded-lg card-shadow overflow-hidden flex flex-col">
+<div class="px-5 py-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-xs font-bold text-slate-700 uppercase">Últimas Movimentações</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-outline-variant">
+<th class="px-5 py-3">Processo</th>
+<th class="px-5 py-3">Movimento</th>
+<th class="px-5 py-3">Origem</th>
+<th class="px-5 py-3">Destino</th>
+<th class="px-5 py-3">Responsável</th>
+<th class="px-5 py-3">Data/Hora</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-[11px]">
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-blue-600">2026.000123</td>
+<td class="px-5 py-3 uppercase">Seguir</td>
+<td class="px-5 py-3">Compras</td>
+<td class="px-5 py-3">Jurídico</td>
+<td class="px-5 py-3">João da Silva</td>
+<td class="px-5 py-3 text-slate-400">10/08/2026 10:23</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-blue-600">2026.000122</td>
+<td class="px-5 py-3 uppercase">Retornar</td>
+<td class="px-5 py-3">Jurídico</td>
+<td class="px-5 py-3">Compras</td>
+<td class="px-5 py-3">Maria Santos</td>
+<td class="px-5 py-3 text-slate-400">10/08/2026 09:15</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-blue-600">2026.000121</td>
+<td class="px-5 py-3 uppercase">Seguir</td>
+<td class="px-5 py-3">Financeiro</td>
+<td class="px-5 py-3">Gestão</td>
+<td class="px-5 py-3">Carlos Lima</td>
+<td class="px-5 py-3 text-slate-400">09/08/2026 16:42</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Delayed Processes -->
+<div class="bg-white rounded-lg card-shadow overflow-hidden flex flex-col">
+<div class="px-5 py-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-xs font-bold text-slate-700 uppercase">Processos em Atraso (SLA)</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-outline-variant">
+<th class="px-5 py-3">Processo</th>
+<th class="px-5 py-3">Etapa</th>
+<th class="px-5 py-3">Atraso</th>
+<th class="px-5 py-3">Responsável</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-[11px]">
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-slate-700">2026.000118</td>
+<td class="px-5 py-3">Parecer Jurídico</td>
+<td class="px-5 py-3 text-error font-bold">3 dias</td>
+<td class="px-5 py-3">Maria Santos</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-slate-700">2026.000115</td>
+<td class="px-5 py-3">Financeiro</td>
+<td class="px-5 py-3 text-error font-bold">2 dias</td>
+<td class="px-5 py-3">Carlos Lima</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="px-5 py-3 font-bold text-slate-700">2026.000110</td>
+<td class="px-5 py-3">Controle Interno</td>
+<td class="px-5 py-3 text-error font-bold">1 dia</td>
+<td class="px-5 py-3">Ana Paula</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Section: Detail Preview (Floating Action Mock) -->
+<section class="mt-10 bg-white rounded-lg card-shadow overflow-hidden border border-slate-200">
+<div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="text-base font-bold text-slate-800">Processo 2026.000123</h4>
+<span class="bg-green-100 text-green-700 text-[9px] font-bold px-2 py-0.5 rounded uppercase">EM ANDAMENTO</span>
+</div>
+<p class="text-xs text-slate-500">Aquisição de Equipamentos de TI</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">forward</span> Encaminhar
+                </button>
+<button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">rate_review</span> Emitir Parecer
+                </button>
+<button class="bg-white border border-slate-300 text-slate-600 text-xs font-bold px-4 py-2 rounded hover:bg-slate-50 flex items-center gap-1.5">
+                    Ações <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6 bg-white">
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Modalidade</p>
+<p class="text-xs font-semibold">Pregão Eletrônico</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Prioridade</p>
+<p class="text-xs font-bold text-error">ALTA</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Valor Estimado</p>
+<p class="text-xs font-semibold">R$ 250.000,00</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Prazo (SLA)</p>
+<p class="text-xs font-bold text-error">12/06/2026 (2 dias)</p>
+</div>
+</div>
+</section>
+</main>
+<!-- END: MainContent -->
+
+
+</body></html>
