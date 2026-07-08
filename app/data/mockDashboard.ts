@@ -89,7 +89,7 @@ export const dashboardData: DashboardData = {
   navigation: [
     { label: "Dashboard", icon: "grid", href: "/", active: true },
     { label: "Minha Caixa", icon: "inbox", href: "/minha-caixa" },
-    { label: "Processos", icon: "file-text", href: "#" },
+    { label: "Processos", icon: "file-text", href: "/processos" },
   ],
   metrics: [
     { label: "Processos Abertos", value: "124", trend: "+ 12 este mês", tone: "info" },
