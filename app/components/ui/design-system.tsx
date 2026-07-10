@@ -203,6 +203,42 @@ export function Breadcrumbs({ items }: { items: Array<{ label: string; href?: st
   );
 }
 
+export function SectionTabs({
+  tabs,
+  activeTab,
+  onTabChange,
+  className,
+}: {
+  tabs: Array<{ id: string; label: string }>;
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+  className?: string;
+}) {
+  return (
+    <div className={cn("border-b border-slate-200", className)}>
+      <nav className="flex flex-wrap gap-4 overflow-x-auto text-xs font-semibold text-slate-500">
+        {tabs.map((tab) => {
+          const isActive = tab.id === activeTab;
+
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => onTabChange(tab.id)}
+              className={cn(
+                "cursor-pointer border-b-2 pb-3 transition-colors",
+                isActive ? "border-[#1a2b4b] text-[#1a2b4b]" : "border-transparent hover:border-slate-300",
+              )}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
+
 export function Timeline({ items }: { items: Array<{ title: string; description: string; status?: string }> }) {
   return (
     <div className="space-y-4">

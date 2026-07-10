@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { Calendar } from "lucide-react";
 import { Input, Select, Button, Badge, Table } from "@/app/components/ui/design-system";
 import type { ProcessosData, ProcessItem } from "@/app/data/mockProcessos";
@@ -10,6 +11,7 @@ type ProcessosViewProps = {
 };
 
 export function ProcessosView({ data }: ProcessosViewProps) {
+  const router = useRouter();
   const [filters, setFilters] = useState({
     protocol: "",
     processNumber: "",
@@ -26,20 +28,36 @@ export function ProcessosView({ data }: ProcessosViewProps) {
 
   // Filter logic
   const filteredProcesses = useMemo(() => {
+    const normalize = (value: string) =>
+      value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
     return data.processes.filter((process: ProcessItem) => {
+      const modalityLabel =
+        data.filterOptions.modalidades.find((opt) => opt.id === filters.modality)?.label ?? "";
+      const departmentLabel =
+        data.filterOptions.departments.find((opt) => opt.id === filters.department)?.label ?? "";
+
       const matchProtocol =
         filters.protocol === "" ||
-        process.id.toLowerCase().includes(filters.protocol.toLowerCase());
+        normalize(process.id).includes(normalize(filters.protocol)) ||
+        normalize(process.protocol ?? "").includes(normalize(filters.protocol));
 
       const matchProcessNumber =
         filters.processNumber === "" ||
-        process.id.toLowerCase().includes(filters.processNumber.toLowerCase());
+        normalize(process.processNumber ?? "").includes(normalize(filters.processNumber)) ||
+        normalize(process.id).includes(normalize(filters.processNumber));
 
       const matchSei =
-        filters.sei === "" || process.id.toLowerCase().includes(filters.sei.toLowerCase());
+        filters.sei === "" || normalize(process.sei ?? "").includes(normalize(filters.sei));
 
       const matchModality =
-        filters.modality === "" || process.modality.toLowerCase() === filters.modality.toLowerCase();
+        filters.modality === "" ||
+        normalize(process.modality).includes(normalize(filters.modality)) ||
+        normalize(process.modality).includes(normalize(modalityLabel));
 
       const matchStatus =
         filters.status === "" || process.status === filters.status;
@@ -47,10 +65,11 @@ export function ProcessosView({ data }: ProcessosViewProps) {
       const matchPriority =
         filters.priority === "" || process.priority === filters.priority;
 
-      // Department filter (simplified - checking if stage/department contains the filter)
       const matchDepartment =
         filters.department === "" ||
-        process.currentStage.toLowerCase().includes(filters.department.toLowerCase());
+        normalize(process.currentStage).includes(normalize(departmentLabel)) ||
+        normalize(process.department ?? "").includes(normalize(departmentLabel)) ||
+        normalize(process.department ?? "").includes(normalize(filters.department));
 
       return (
         matchProtocol &&
@@ -62,7 +81,7 @@ export function ProcessosView({ data }: ProcessosViewProps) {
         matchDepartment
       );
     });
-  }, [filters, data.processes]);
+  }, [filters, data.processes, data.filterOptions.departments, data.filterOptions.modalidades]);
 
   const getStatusTone = (status: string) => {
     switch (status) {
@@ -123,9 +142,14 @@ export function ProcessosView({ data }: ProcessosViewProps) {
       "Prazo",
     ],
     rows: filteredProcesses.map((process: ProcessItem) => [
-      <span key={`${process.id}-id`} className="font-bold text-blue-600">
+      <button
+        key={`${process.id}-id`}
+        type="button"
+        className="font-bold text-blue-600 hover:underline"
+        onClick={() => router.push(`/visao-360?id=${process.id}`)}
+      >
         {process.id}
-      </span>,
+      </button>,
       <span key={`${process.id}-obj`} className="text-slate-600">
         {process.object}
       </span>,
