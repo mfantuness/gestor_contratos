@@ -22,6 +22,59 @@ export interface ProcessMovement {
   tone: "info" | "success" | "warning" | "error";
 }
 
+export interface ProcessDocument {
+  id: string;
+  name: string;
+  type: string;
+  required: boolean;
+  status: "Anexado" | "Pendente" | "Em revisão";
+  version: string;
+  date: string;
+  responsible: string;
+  fileType: string;
+}
+
+export interface ProcessOpinion {
+  id: string;
+  type: string;
+  title: string;
+  author: string;
+  status: "Emitido" | "Rascunho" | "Em revisão";
+  date: string;
+  summary: string;
+}
+
+export interface ProcessDispatch {
+  id: string;
+  date: string;
+  author: string;
+  text: string;
+  type?: string;
+  status?: "Emitido" | "Pendente" | "Concluído";
+}
+
+export interface ProcessSignature {
+  id: string;
+  document: string;
+  signatory: string;
+  role: string;
+  type: string;
+  status: "Assinado" | "Pendente" | "Em revisão";
+  requestDate: string;
+  signatureDate?: string;
+}
+
+export interface ProcessAuditEntry {
+  id: string;
+  timestamp: string;
+  user: string;
+  entity: string;
+  action: string;
+  details: string;
+  module?: string;
+  severity?: "Alta" | "Média" | "Baixa";
+}
+
 export interface ProcessItem {
   id: string;
   object: string;
@@ -40,6 +93,11 @@ export interface ProcessItem {
   workflowTitle?: string;
   workflowSteps?: WorkflowStep[];
   movements?: ProcessMovement[];
+  documents?: ProcessDocument[];
+  opinions?: ProcessOpinion[];
+  dispatches?: ProcessDispatch[];
+  signatures?: ProcessSignature[];
+  audits?: ProcessAuditEntry[];
   estimatedValue?: string;
   expectedConclusionDate?: string;
   createdAt?: string;
@@ -70,6 +128,11 @@ export interface ProcessDetailData extends ProcessItem {
   workflowTitle: string;
   workflowSteps: WorkflowStep[];
   movements: ProcessMovement[];
+  documents: ProcessDocument[];
+  opinions: ProcessOpinion[];
+  dispatches: ProcessDispatch[];
+  signatures: ProcessSignature[];
+  audits: ProcessAuditEntry[];
   estimatedValue: string;
   expectedConclusionDate: string;
   createdAt: string;
@@ -236,6 +299,240 @@ export const processosData: ProcessosData = {
           to: "Compras (João da Silva)",
           note: "Início do processo.",
           tone: "info",
+        },
+      ],
+      documents: [
+        {
+          id: "doc-1",
+          name: "DFD",
+          type: "Documento Inicial",
+          required: true,
+          status: "Anexado",
+          version: "1.0",
+          date: "02/06/2026",
+          responsible: "João da Silva",
+          fileType: "PDF",
+        },
+        {
+          id: "doc-2",
+          name: "ETP",
+          type: "Documento Inicial",
+          required: true,
+          status: "Anexado",
+          version: "1.0",
+          date: "03/06/2026",
+          responsible: "João da Silva",
+          fileType: "PDF",
+        },
+        {
+          id: "doc-3",
+          name: "TR",
+          type: "Documento Inicial",
+          required: true,
+          status: "Anexado",
+          version: "1.0",
+          date: "04/06/2026",
+          responsible: "João da Silva",
+          fileType: "PDF",
+        },
+        {
+          id: "doc-4",
+          name: "Matriz de Risco",
+          type: "Documento Complementar",
+          required: false,
+          status: "Anexado",
+          version: "1.0",
+          date: "04/06/2026",
+          responsible: "Maria Santos",
+          fileType: "XLSX",
+        },
+        {
+          id: "doc-5",
+          name: "Pesquisa de Preço",
+          type: "Documento Inicial",
+          required: true,
+          status: "Anexado",
+          version: "1.0",
+          date: "05/06/2026",
+          responsible: "João da Silva",
+          fileType: "PDF",
+        },
+        {
+          id: "doc-6",
+          name: "Parecer Jurídico",
+          type: "Parecer",
+          required: true,
+          status: "Pendente",
+          version: "-",
+          date: "-",
+          responsible: "Maria Santos",
+          fileType: "PDF",
+        },
+        {
+          id: "doc-7",
+          name: "Minuta do Contrato",
+          type: "Contrato",
+          required: true,
+          status: "Pendente",
+          version: "-",
+          date: "-",
+          responsible: "João da Silva",
+          fileType: "DOCX",
+        },
+      ],
+      opinions: [
+        {
+          id: "op-1",
+          type: "Jurídico",
+          title: "Parecer Jurídico nº 45/2026",
+          author: "Maria Santos",
+          status: "Emitido",
+          date: "10/06/2026",
+          summary: "Conclusão favorável à continuidade do processo com ajustes menores no contrato.",
+        },
+        {
+          id: "op-2",
+          type: "Financeiro",
+          title: "Análise Orçamentária nº 12/2026",
+          author: "Carlos Lima",
+          status: "Rascunho",
+          date: "-",
+          summary: "Aguardando validação do valor estimado após revisão da proposta.",
+        },
+        {
+          id: "op-3",
+          type: "Técnico",
+          title: "Análise Técnica nº 08/2026",
+          author: "Ana Paula",
+          status: "Emitido",
+          date: "07/06/2026",
+          summary: "Documento técnico aprovado em sua íntegra para prosseguimento da fase atual.",
+        },
+        {
+          id: "op-4",
+          type: "Controle Interno",
+          title: "Manifestação nº 05/2026",
+          author: "Roberto Alves",
+          status: "Em revisão",
+          date: "-",
+          summary: "Retorno solicitado para complementação das evidências de conformidade.",
+        },
+      ],
+      dispatches: [
+        {
+          id: "dispatch-1",
+          date: "10/06/2026 10:25",
+          author: "João de Silva",
+          text: "Encaminho para análise jurídica.",
+          type: "Encaminhamento",
+          status: "Emitido",
+        },
+        {
+          id: "dispatch-2",
+          date: "09/06/2026 09:20",
+          author: "Maria Santos",
+          text: "Solicito complementação do ETP.",
+          type: "Solicitação",
+          status: "Pendente",
+        },
+        {
+          id: "dispatch-3",
+          date: "08/06/2026 16:45",
+          author: "João de Silva",
+          text: "De acordo. Encaminho para parecer técnico.",
+          type: "Aprovação",
+          status: "Concluído",
+        },
+        {
+          id: "dispatch-4",
+          date: "07/06/2026 11:35",
+          author: "João de Silva",
+          text: "Providenciar pesquisa de preços.",
+          type: "Orientação",
+          status: "Emitido",
+        },
+      ],
+      signatures: [
+        {
+          id: "sig-1",
+          document: "Parecer Jurídico nº 45/2026",
+          signatory: "Maria Santos",
+          role: "Coordenadora Jurídica",
+          type: "ICP Brasil",
+          status: "Assinado",
+          requestDate: "08/06/2026",
+          signatureDate: "10/06/2026",
+        },
+        {
+          id: "sig-2",
+          document: "Termo de Referência",
+          signatory: "João da Silva",
+          role: "Analista de Compras",
+          type: "GOV.BR",
+          status: "Assinado",
+          requestDate: "05/06/2026",
+          signatureDate: "08/06/2026",
+        },
+        {
+          id: "sig-3",
+          document: "ETP – Estudo Técnico",
+          signatory: "João da Silva",
+          role: "Analista de Compras",
+          type: "GOV.BR",
+          status: "Assinado",
+          requestDate: "04/06/2026",
+          signatureDate: "08/06/2026",
+        },
+        {
+          id: "sig-4",
+          document: "ACEITE – Documento de Formalização",
+          signatory: "João da Silva",
+          role: "Gerente de Compras",
+          type: "ACEITE INTERNO",
+          status: "Pendente",
+          requestDate: "10/06/2026",
+        },
+      ],
+      audits: [
+        {
+          id: "audit-1",
+          timestamp: "10/06/2026 10:33",
+          user: "João de Silva",
+          entity: "PROCESSO",
+          action: "UPDATE",
+          details: "Processo encaminhado de Compras para Jurídico",
+          module: "Workflow",
+          severity: "Média",
+        },
+        {
+          id: "audit-2",
+          timestamp: "10/06/2026 09:15",
+          user: "Maria Santos",
+          entity: "PROCESSO",
+          action: "UPDATE",
+          details: "Processo retornado para Compras",
+          module: "Workflow",
+          severity: "Alta",
+        },
+        {
+          id: "audit-3",
+          timestamp: "08/06/2026 16:42",
+          user: "João de Silva",
+          entity: "DOCUMENTO",
+          action: "INSERT",
+          details: "Documento TR anexado",
+          module: "Documentos",
+          severity: "Baixa",
+        },
+        {
+          id: "audit-4",
+          timestamp: "07/06/2026 11:30",
+          user: "João da Silva",
+          entity: "PROCESSO",
+          action: "INSERT",
+          details: "Processo criado",
+          module: "Processos",
+          severity: "Média",
         },
       ],
       estimatedValue: "R$ 250.000,00",
