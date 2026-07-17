@@ -90,6 +90,9 @@ export const dashboardData: DashboardData = {
     { label: "Dashboard", icon: "grid", href: "/", active: true },
     { label: "Minha Caixa", icon: "inbox", href: "/minha-caixa" },
     { label: "Processos", icon: "file-text", href: "/processos" },
+    { label: "SLA", icon: "clock", href: "/monitoramento/sla" },
+    { label: "Centro Documental", icon: "file-text", href: "/monitoramento/centro-documental" },
+    { label: "Relatórios", icon: "bar-chart-3", href: "/relatorios" },
   ],
   metrics: [
     { label: "Processos Abertos", value: "124", trend: "+ 12 este mês", tone: "info" },
